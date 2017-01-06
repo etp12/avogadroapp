@@ -31,6 +31,7 @@ set(avogadro_srcs
 
 qt5_wrap_ui(ui_srcs
   aboutdialog.ui
+  mainwindow.ui
 )
 
 qt5_add_resources(rcc_srcs avogadro.qrc)
@@ -61,6 +62,10 @@ endif()
 
 # Handle Mac OS X specific icons etc.
 if(APPLE)
+  # add some Objective-C++ code
+  list(APPEND avogadro_srcs mac.mm)
+  set(CMAKE_EXE_LINKER_FLAGS "-framework Foundation -framework Cocoa")
+
   list(APPEND avogadro_srcs icons/avogadro.icns)
   set(MACOSX_BUNDLE_ICON_FILE avogadro.icns)
   set(MACOSX_BUNDLE_BUNDLE_VERSION "${AvogadroApp_VERSION}")
